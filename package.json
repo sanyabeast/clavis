@@ -1,0 +1,19 @@
+{
+    "version": "0.1.1-a",
+    "name": "cyboard",
+    "scripts": {
+        "increase": "node node_modules/vpplus/vpplus.js increase-build"
+    },
+    "author": {
+        "name": "Alex Gaivoronski",
+        "email": "a.gvrnsk@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sanyabeast/cyboard.git"
+    },
+    "dependencies": {
+        "vpplus": "git://github.com/sanyabeast/vpplus.git",
+        "requirejs": "latest",
+    },
+}
