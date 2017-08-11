@@ -1,5 +1,13 @@
-"use strict";
-define(function(){
+(function (root, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(factory);
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = factory(true);
+    } else {
+    	var cyboard = new factory();
+    	window.cyboard = cyboard;
+    }
+}(this, function(){
 
 	var Cyboard = function(element){
 		this.tasks = {
@@ -256,5 +264,5 @@ define(function(){
 	};
 
 	return Cyboard;
-
-});
+    
+}));
