@@ -7,7 +7,7 @@ cyboard.keydown("h", function(){
   alert("Hello");
 });
 
-cyboard.keypress("w", function((evt, eventName, keyName){
+cyboard.keypress("w", function(evt, eventName, keyName){
   alert(keyName + "orld!");
 });
 
