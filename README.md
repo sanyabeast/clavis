@@ -1,4 +1,4 @@
-# cyboard
+# CLAVIS
 
 ## Keys
 
