@@ -145,7 +145,6 @@ define(function(){
 			return taskname;
 		},
 		_invoke : function(eventname, keyname, eventObj){
-			//console.log(eventname, keyname);
 
 			if (!this.tasks[eventname][keyname]){
 				return;
@@ -160,7 +159,6 @@ define(function(){
 			var keyname = this._getKeyname(eventObj);
 			var combination, cheatcode;
 
-			console.log(keyname);
 
 			if (type == "keydown"){
 				combination = this._getCombination(eventObj, keyname);
