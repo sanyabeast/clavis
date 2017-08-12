@@ -4,12 +4,15 @@
     } else if (typeof module === "object" && module.exports) {
         module.exports = factory(true);
     } else {
-    	var cyboard = new factory();
-    	window.cyboard = cyboard;
+    	var Clavis = factory();
+    	var clavis = new Clavis();
+    	window.clavis = clavis;
     }
 }(this, function(){
 
-	var Cyboard = function(element){
+	var Clavis = function(element){
+		element = element || window;
+
 		this.tasks = {
 			keydown : {},
 			keypress : {},
@@ -18,14 +21,15 @@
 			cheatcode : {}
 		};
 
-		this.cheatcodesString = "";
+		this._cheatcodesString = "";
 
 		element.addEventListener("keydown", this._proccessEvent.bind(this));
 		element.addEventListener("keypress", this._proccessEvent.bind(this));
 		element.addEventListener("keyup", this._proccessEvent.bind(this));
 	};
 
-	Cyboard.prototype = {
+	Clavis.prototype = {
+		Clavis : Clavis,
 		_keycodes : {
 			"9": "Tab",
 		    "13": "Enter",
@@ -158,8 +162,14 @@
 				return;
 			}
 
+			if (typeof this["_on" + eventname] == "function"){
+				this["_on" + eventname](eventObj, eventname, keyname);
+			}
+
 			for (var a in this.tasks[eventname][keyname]){
-				this.tasks[eventname][keyname][a](eventObj, eventname, keyname);
+				if (typeof this.tasks[eventname][keyname] == "function"){
+					this.tasks[eventname][keyname][a](eventObj, eventname, keyname);
+				}
 			}
 		},
 		_proccessEvent : function(eventObj){
@@ -226,20 +236,20 @@
 			}
 
 			var maxLength = 0;
-			this.cheatcodesString += keyname;
+			this._cheatcodesString += keyname;
 
 			for (var k in this.tasks.cheatcode){
 				if (k.length > maxLength){
 					maxLength = k.length;
 				}
 
-				if (this.cheatcodesString.match(k)){
-					this.cheatcodesString = "";
+				if (this._cheatcodesString.match(k)){
+					this._cheatcodesString = "";
 					return k;
 				}
 			}
 
-			this.cheatcodesString = this.cheatcodesString.substring(this.cheatcodesString.length - maxLength, this.cheatcodesString.length);
+			this._cheatcodesString = this._cheatcodesString.substring(this._cheatcodesString.length - maxLength, this._cheatcodesString.length);
 			return null;
 
 		},
@@ -258,11 +268,19 @@
 		cheatcode : function(keyname, callback){
 			return this._addTask("cheatcode", keyname, callback);
 		},
+		on : function(eventname, keyname, callback){
+			if (typeof keyname == "function"){
+				callback = keyname;
+				this["_on" + eventname] = callback;				
+			} else {
+				this[eventname](keyname, callback);
+			}
+		},
 		off : function(eventname, keyname, taskname){
 			delete this.tasks[eventname][keyname][taskname];
-		}
+		},
 	};
 
-	return Cyboard;
+	return Clavis;
     
 }));

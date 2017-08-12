@@ -3,19 +3,19 @@
 ## Keys
 
 ```javascript
-cyboard.keydown("h", function(){
+clavis.keydown("h", function(){
   alert("Hello");
 });
 
-cyboard.keypress("w", function(evt, eventName, keyName){
+clavis.keypress("w", function(evt, eventName, keyName){
   alert(keyName + "orld!");
 });
 
-var keySubscription = cyboard.keypress("q", function(){
+var keySubscription = clavis.keypress("q", function(){
   console.log("qwerty");
 });
 
-cyboard.off("keypress", "q", keySubscription);
+clavis.off("keypress", "q", keySubscription);
 
 ```
 
@@ -23,7 +23,7 @@ cyboard.off("keypress", "q", keySubscription);
 
 ```javascript
 
-cyboard.combination("ctrt+alt+r", function(evt){
+clavis.combination("ctrt+alt+r", function(evt){
     evt.preventDefault();
     window.location.reload();
 });
@@ -33,12 +33,12 @@ cyboard.combination("ctrt+alt+r", function(evt){
 ## Cheatcodes
 
 ```javascript
-cyboard.combination("hesoyam", function(){
+clavis.combination("hesoyam", function(){
   cj.health = 1;
   cj.money = 250000;
 });
 
-cyboard.combination("whosyadaddy", function(){
+clavis.combination("whosyadaddy", function(){
   alert("Alex <a.gvrnsk@gmail.com>");
 });
 

@@ -1,5 +1,5 @@
-requirejs(["cyboard"], function(Cyboard){
+requirejs(["clavis"], function(Clavis){
 
-	window.cyboard = new Cyboard(window);
+	window.clavis = new Clavis(window);
 
 });
