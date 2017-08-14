@@ -206,10 +206,6 @@
 			return keyname.toLowerCase().replace("key", "");
 		},
 		_getCombination : function(eventObj, keyname){
-			if (keyname.length != 1){
-				return;
-			}
-
 			var combination = keyname;
 
 			if (eventObj.shiftKey){
