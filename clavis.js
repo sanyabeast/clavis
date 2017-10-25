@@ -173,10 +173,14 @@
             }
         },
         _proccessEvent : function(eventObj){
+            // console.log(eventObj);
             var type = eventObj.type;
             var keyname = this._getKeyname(eventObj);
             var combination, cheatcode;
 
+            if (keyname == null){
+                return;
+            }
 
             // console.log(keyname);
 
@@ -203,8 +207,19 @@
 
         },
         _getKeyname : function(eventObj){
-            if (!eventObj.code) eventObj.code = this._keycodes[eventObj.keyCode];
-            var keyname = this._keyreplace[eventObj.code.toLowerCase()] || eventObj.code;
+            var code = (eventObj.code && eventObj.code.length) ? eventObj.code : eventObj.key; 
+            
+            if (code == "Unidentified"){
+                return "";
+            }
+
+            if (code) code = this._keycodes[eventObj.keyCode];
+
+            if (typeof code != "string"){
+                return "";
+            }
+
+            var keyname = this._keyreplace[code.toLowerCase()] || code;
             return keyname.toLowerCase().replace("key", "");
         },
         _getCombination : function(eventObj, keyname){
@@ -214,7 +229,7 @@
                 combination = "shift+" + combination;
             }
 
-            if (eventObj.altKey){
+            if (eventObj.altKey || eventObj.metaKey){
                 combination = "alt+" + combination;
             }
 
